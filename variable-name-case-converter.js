@@ -2,7 +2,7 @@ const main = () => {
     const selectedCase = toKebabCase(process.argv[2]);
     const input = process.argv[3];
     const debugging = (process.argv[4] || "").toLowerCase();
-    
+
     if (debugging === 'debug=true') {
         debug("List words", listWords(input));
         debug("Camel case", toCamelCase(input));
@@ -12,7 +12,7 @@ const main = () => {
         debug("Screaming snake case", toSnakeCase(input, scream=true));
         debug("Snake case", toSnakeCase(input), end=true);
         return;}
-        
+
     const cases = [
         "camel",
         "kebab",
@@ -20,7 +20,7 @@ const main = () => {
         "pascal-snake",
         "screaming-snake",
         "snake"];
-    
+
     if (selectedCase === 'help') {
         console.log("1st argument is one of the following:");
         console.log(` - ${cases.join(", ")}`);
@@ -33,7 +33,7 @@ const main = () => {
         console.log(
             `Select one of the available options: ${cases.join(", ")}`)
         return;}
-    
+
     if (!input) {
         console.log("Please provide a string as an argument.");
         return;}
@@ -57,11 +57,16 @@ const main = () => {
         case "snake":
             console.log(toSnakeCase(input));}}
 
-const removeAccents = (str) => {
+export const removeAccents = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');}
 
-const listWords = (str) => {
+export const listWords = (str) => {
+    if (/^[A-Z]+(?:_[A-Z]+)*$/.test(str))
+        return str.toLowerCase().split('_');
+    if (/^[A-Z]+(?: [A-Z]+)*$/.test(str))
+        return str.toLowerCase().split(' ');
     return removeAccents(str)
+        .replace(/([A-Z])([A-Z])/g, '$1 $2')
         .replace(/([a-z])([A-Z])/g, '$1 $2')
         .toLowerCase()
         .replace(/[^a-z0-9 ]/g, ' ')
@@ -70,25 +75,25 @@ const listWords = (str) => {
         .split(' ')
         .filter(e => e != '');}
 
-const toCamelCase = (str) => {
-    list = listWords(str);
+export const toCamelCase = (str) => {
+    const list = listWords(str);
     if (list.length === 1)
         return list[0];
-    words = [ list[0] ];
+    const words = [ list[0] ];
     return [words[0], ...list
             .splice(1).map(e => e[0] && e[0].toUpperCase() + e.slice(1))]
             .join('')}
-    
-const toKebabCase = (str) => {
+
+export const toKebabCase = (str) => {
     return listWords(str)
         .join('-');}
-    
-const toPascalCase = (str, snake=false) => {
-    list = listWords(str);
+
+export const toPascalCase = (str, snake=false) => {
+    const list = listWords(str);
     list[0] = list[0][0].toUpperCase() + (list[0].slice(1) || "")
     if (list.length === 1)
         return list[0];
-    words = [ list[0] ];
+    let words = [ list[0] ];
     if (list.length > 1) {
         words = [words[0], ...list
             .splice(1).map(e => e[0] && e[0].toUpperCase() + e.slice(1))]}
@@ -96,13 +101,13 @@ const toPascalCase = (str, snake=false) => {
         return words.join('_');
     return words.join('');}
 
-const toSnakeCase = (str, scream=false) => {
-    list = listWords(str);
+export const toSnakeCase = (str, scream=false) => {
+    let list = listWords(str);
     if (scream)
         list = list.map(e => e.toUpperCase());
     return list.join('_');}
 
-const debug = (name, result, end=false) => {
+export const debug = (name, result, end=false) => {
     console.log(name+":");
     console.log(" -", result);
     !end && console.log();}
