@@ -2,7 +2,7 @@
   "name": "variable-name-case-converter",
   "version": "0.0.1",
   "description": "---",
-  "main": "variable-name-case-converter.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "test": "mocha test/*.test.js"

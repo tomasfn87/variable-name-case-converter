@@ -3,15 +3,14 @@ import { runTestArray } from './run-test-array.js';
 import { listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase }
     from '../variable-name-case-converter.js';
 
-const results = {
+const expected = {
     "list": [ "stop", "being", "a", "drug", "addict" ],
     "camel": "stopBeingADrugAddict",
     "kebab": "stop-being-a-drug-addict",
     "pascal": "StopBeingADrugAddict",
     "pascalSnake": "Stop_Being_A_Drug_Addict",
     "screamingSnake": "STOP_BEING_A_DRUG_ADDICT",
-    "snake": "stop_being_a_drug_addict"
-};
+    "snake": "stop_being_a_drug_addict"};
 
 [
     {
@@ -20,74 +19,73 @@ const results = {
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "stop being a drug addict",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "stop-being-a-drug-addict",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "stop_being_a_drug_addict",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                result: results.list
+                result: expected.list
             },
             {
                 value: "Stop being a drug addict!",
-                result: results.list
+                result: expected.list
             }
         ]
-    }
-    ,
+    },
     {
         title:   'To Camel Case (toCamelCase)',
         fn:      toCamelCase,
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "stop being a drug addict",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "stop-being-a-drug-addict",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "stop_being_a_drug_addict",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                result: results.camel
+                result: expected.camel
             },
             {
                 value: "Stop being a drug addict!",
-                result: results.camel
+                result: expected.camel
             }
         ]
     },
@@ -97,35 +95,35 @@ const results = {
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "stop being a drug addict",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "stop-being-a-drug-addict",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "stop_being_a_drug_addict",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                result: results.kebab
+                result: expected.kebab
             },
             {
                 value: "Stop being a drug addict!",
-                result: results.kebab
+                result: expected.kebab
             }
         ]
     },
@@ -135,82 +133,81 @@ const results = {
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "stop being a drug addict",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "stop-being-a-drug-addict",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "stop_being_a_drug_addict",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                result: results.pascal
+                result: expected.pascal
             },
             {
                 value: "Stop being a drug addict!",
-                result: results.pascal
+                result: expected.pascal
             }
         ]
-    }
-    ,
+    },
     {
-        title:   'To Pascal Case (toPascalCase); snake=true',
+        title:   'To Pascal Case (toPascalCase); mode="snake"',
         fn:      toPascalCase,
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "stop being a drug addict",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "stop-being-a-drug-addict",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "stop_being_a_drug_addict",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             },
             {
                 value: "Stop being a drug addict!",
-                args:  [true],
-                result: results.pascalSnake
+                args:  ["snake"],
+                result: expected.pascalSnake
             }
         ]
     },
@@ -220,81 +217,81 @@ const results = {
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "stop being a drug addict",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "stop-being-a-drug-addict",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "stop_being_a_drug_addict",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                result: results.snake
+                result: expected.snake
             },
             {
                 value: "Stop being a drug addict!",
-                result: results.snake
+                result: expected.snake
             }
         ]
     },
     {
-        title:   'To Snake Case (toSnakeCase); scream=true',
+        title:   'To Snake Case (toSnakeCase); mode="screaming"',
         fn:      toSnakeCase,
         testArr: [
             {
                 value: "StopBeingADrugAddict",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "stop being a drug addict",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "stop-being-a-drug-addict",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "stop_being_a_drug_addict",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "Stop_Being_A_Drug_Addict",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "STOP BEING A DRUG ADDICT",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "STOP_BEING_A_DRUG_ADDICT",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             },
             {
                 value: "Stop being a drug addict!",
-                args:  [true],
-                result: results.screamingSnake
+                args:  ["screaming"],
+                result: expected.screamingSnake
             }
         ]
     }

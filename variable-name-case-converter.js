@@ -29,7 +29,7 @@ export const toKebabCase = (str) => {
     return listWords(str)
         .join('-');}
 
-export const toPascalCase = (str, snake=false) => {
+export const toPascalCase = (str, mode="") => {
     const list = listWords(str);
     list[0] = list[0][0].toUpperCase() + (list[0].slice(1) || "")
     if (list.length === 1)
@@ -38,13 +38,13 @@ export const toPascalCase = (str, snake=false) => {
     if (list.length > 1) {
         words = [words[0], ...list
             .splice(1).map(e => e[0] && e[0].toUpperCase() + e.slice(1))]}
-    if (snake)
+    if (mode == "snake")
         return words.join('_');
     return words.join('');}
 
-export const toSnakeCase = (str, scream=false) => {
+export const toSnakeCase = (str, mode="") => {
     let list = listWords(str);
-    if (scream)
+    if (mode == "screaming")
         list = list.map(e => e.toUpperCase());
     return list.join('_');}
 
