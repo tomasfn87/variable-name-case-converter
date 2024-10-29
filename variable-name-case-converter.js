@@ -8,9 +8,9 @@ const main = () => {
         debug("Camel case", toCamelCase(input));
         debug("Kebab case", toKebabCase(input));
         debug("Pascal case", toPascalCase(input));
-        debug("Pascal snake case", toPascalCase(input, snake=true));
-        debug("Screaming snake case", toSnakeCase(input, scream=true));
-        debug("Snake case", toSnakeCase(input), end=true);
+        debug("Pascal snake case", toPascalCase(input, true));
+        debug("Screaming snake case", toSnakeCase(input, true));
+        debug("Snake case", toSnakeCase(input), true);
         return;}
 
     const cases = [
