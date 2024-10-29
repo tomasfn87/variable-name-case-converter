@@ -1,0 +1,30 @@
+{
+  "name": "variable-name-case-converter",
+  "version": "0.0.1",
+  "description": "---",
+  "main": "variable-name-case-converter.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha test/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomasfn87/variable-name-case-converter.git"
+  },
+  "keywords": [
+    "variable",
+    "name",
+    "case",
+    "converter"
+  ],
+  "author": "tomasfn87",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomasfn87/variable-name-case-converter/issues"
+  },
+  "homepage": "https://github.com/tomasfn87/variable-name-case-converter#readme",
+  "devDependencies": {
+    "chai": "^5.1.2",
+    "mocha": "^10.7.3"
+  }
+}
