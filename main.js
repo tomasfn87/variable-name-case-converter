@@ -1,11 +1,26 @@
-import { debug, listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase }
+import { debug, listWords, removeAccents, toCamelCase, toKebabCase,
+    toPascalCase, toSnakeCase, validateCases}
     from './variable-name-case-converter.js';
 
 (() => {
-    const selectedCase = toKebabCase(process.argv[2]);
-    const input = process.argv[3];
-    const debugging = (process.argv[4] || "").toLowerCase();
+    const cases = [
+        "lower case separated by spaces",
+        "upper case separated by spaces",
+        "camel",
+        "kebab",
+        "pascal",
+        "pascal-snake",
+        "screaming-snake",
+        "snake"];
+        
+    let input = process.argv[3];
+    input = removeAccents(input).replace(/[^A-Za-z0-9_ -]/g, '');
+    if (!validateCases(input)) {
+        console.log("Error: input must be in one of the following formats:");
+        console.log(`- ${cases.join("\n- ")}`);
+        return;}
 
+    const debugging = (process.argv[4] || "").toLowerCase();
     if (debugging === 'debug=true') {
         debug("List words", listWords(input));
         debug("Camel case", toCamelCase(input));
@@ -15,14 +30,13 @@ import { debug, listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase }
         debug("Screaming snake case", toSnakeCase(input, "screaming"));
         debug("Snake case", toSnakeCase(input), true);
         return;}
+            
+    if (!validateCases(process.argv[2])) {
+        console.log("Error: case must be in one of the following formats:");
+        console.log(`- ${cases.slice(2).join("\n- ")}`);
+        return;}
 
-    const cases = [
-        "camel",
-        "kebab",
-        "pascal",
-        "pascal-snake",
-        "screaming-snake",
-        "snake"];
+    const selectedCase = toKebabCase(process.argv[2]);
 
     if (selectedCase === 'help') {
         console.log("1st argument is one of the following:");
@@ -34,7 +48,7 @@ import { debug, listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase }
 
     if (!cases.includes(selectedCase)) {
         console.log(
-            `Select one of the available options: \n- ${cases.join("\n- ")}`)
+            `Select one of the available options: \n- ${cases.slice(2).join("\n- ")}`)
         return;}
 
     if (!input) {

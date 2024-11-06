@@ -1,3 +1,8 @@
+export const validateCases = (str) => {
+    RegExp = {
+        cases: /^(?:[a-z]+(?:[A-Z][a-z]*)*)$|^(?:[a-z]+(?:-[a-z]+)+)$|^(?:[A-Z][a-z]+(?:[A-Z][a-z]*)*)$|^(?:[A-Z][a-z]+(?:_[A-Z][a-z]+)+)$|^(?:[A-Z]+(?:_[A-Z]+)+)$|^(?:[a-z]+(?:_[a-z]+)+)$|^(?:[a-z]+(?: [a-z]+)+)$|^(?:[A-Z][a-z]+(?: [A-Z][a-z]+)* [A-Z][a-z]+(?: [a-z]+)*)$|^(?:[A-Z][a-z]+(?: [A-Z][a-z]+)* [A-Z][a-z]+(?: [A-Z][a-z]+)*)$|^[A-Z]+$|^(?:[A-Z]+(?: [A-Z]+)+)$/};
+    return RegExp.cases.test(str);}
+
 export const removeAccents = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');}
 
