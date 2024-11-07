@@ -4,10 +4,10 @@ import { listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase,
     validateCases } from '../variable-name-case-converter.js';
 
 const invalidInputs = [
-    "stop_BEING_a_DRUGaddict",
     "stop BeingADrug_addict",
-    "_stop_being_a_drug_addict_",
-    "StoP BeinG A DruG AddicT"]
+    "stop_BEING_a_DRUGaddict",
+    "StoP BeinG A DruG AddicT",
+    "_stop_being_a_drug_addict_"];
 
 const validInputs = {
     camel: "stopBeingADrugAddict",
@@ -43,14 +43,14 @@ const expected = {
         { value: 'a', result: true },
         { value: 'A', result: true },
         { value: validInputs.camel, result: true },
-        { value: validInputs.kebab, result: true },
-        { value: validInputs.natural, result: true },
         { value: validInputs.pascal, result: true },
+        { value: validInputs.kebab, result: true },
         { value: validInputs.pascalSnake, result: true },
         { value: validInputs.screamingSnake, result: true },
         { value: validInputs.snake, result: true },
         { value: validInputs.spacedLower, result: true },
-        { value: validInputs.spacedUpper, result: true }
+        { value: validInputs.spacedUpper, result: true },
+        { value: validInputs.natural, result: true }
     ]
 },
 {

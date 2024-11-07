@@ -1,4 +1,4 @@
-import { debug, listWords, toCamelCase, toKebabCase, toPascalCase,
+import { debug, listWords, RegExp, toCamelCase, toKebabCase, toPascalCase,
     toSnakeCase, validateCases }
     from './variable-name-case-converter.js';
 
@@ -53,6 +53,8 @@ import { debug, listWords, toCamelCase, toKebabCase, toPascalCase,
     if (!input) {
         console.log("Please provide a string as an argument.");
         return;}
+
+    input = input.replace(RegExp.notAllowedChars, '');
 
     switch(selectedCase) {
         case "camel":

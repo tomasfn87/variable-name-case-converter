@@ -1,30 +1,41 @@
+export const RegExp = {
+    allUpperCase: /^[A-Z]+(?: [A-Z]+)*$/,
+    camelAndPascal: /^(?:[a-z][A-Za-z]*|[A-Z][a-z]*(?:[A-Z][a-z]*)*)$/,
+    camelAndPascalUpperUpperContact: /([A-Z])([A-Z])/g,
+    camelAndPascalLowerUpperContact: /([a-z])([A-Z])/g,
+    general: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/,
+    inconsistentCapitalization: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/,
+    notAllowedChars: /[^A-Za-z0-9_ -]/g,
+    notLowerCaseOrNumber: /[^a-z0-9 ]/g,
+    pascalSnake: /^[A-Z][a-z]+(?:_[A-Z][a-z]+)*$/,
+    screamingSnake: /^[A-Z]+(?:_[A-Z]+)*$/,
+    trailingEmptySpaces: /^\s+|\s+$/,
+    twoOrMoreEmptySpaces: /\s+/};
+
 export const removeAccents = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');}
 
 export const validateCases = (str) => {
-    str = removeAccents(str).replace(/[^A-Za-z0-9_ -]/g, '');
-    RegExp = {
-        inconsistentCapitalization: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/,
-        camelAndPascal: /^(?:[a-z][A-Za-z]*|[A-Z][a-z]*(?:[A-Z][a-z]*)*)$/,
-        pascalSnake: /^[A-Z][a-z]+(?:_[A-Z][a-z]+)*$/,
-        general: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/};
+    str = removeAccents(str).replace(RegExp.notAllowedChars, '');
     return RegExp.inconsistentCapitalization.test(str)
         || RegExp.camelAndPascal.test(str)
         || RegExp.pascalSnake.test(str)
         || RegExp.general.test(str);}
 
 export const listWords = (str) => {
-    if (/^[A-Z]+(?:_[A-Z]+)*$/.test(str))
+    if (RegExp.inconsistentCapitalization.test(str))
+        str = str.toLowerCase();
+    if (RegExp.screamingSnake.test(str))
         return str.toLowerCase().split('_');
-    if (/^[A-Z]+(?: [A-Z]+)*$/.test(str))
+    if (RegExp.allUpperCase.test(str))
         return str.toLowerCase().split(' ');
     return removeAccents(str)
-        .replace(/([A-Z])([A-Z])/g, '$1 $2')
-        .replace(/([a-z])([A-Z])/g, '$1 $2')
+        .replace(RegExp.camelAndPascalUpperUpperContact, '$1 $2')
+        .replace(RegExp.camelAndPascalLowerUpperContact, '$1 $2')
         .toLowerCase()
-        .replace(/[^a-z0-9 ]/g, ' ')
-        .replace(/\s+/, ' ')
-        .replace(/^\s+|\s+$/, '')
+        .replace(RegExp.notLowerCaseOrNumber, ' ')
+        .replace(RegExp.twoOrMoreEmptySpaces, ' ')
+        .replace(RegExp.trailingEmptySpaces, '')
         .split(' ')
         .filter(e => e != '');}
 
