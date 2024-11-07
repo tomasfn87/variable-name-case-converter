@@ -1,10 +1,17 @@
-export const validateCases = (str) => {
-    RegExp = {
-        cases: /^(?:[a-z]+(?:[A-Z][a-z]*)*)$|^(?:[a-z]+(?:-[a-z]+)+)$|^(?:[A-Z][a-z]+(?:[A-Z][a-z]*)*)$|^(?:[A-Z][a-z]+(?:_[A-Z][a-z]+)+)$|^(?:[A-Z]+(?:_[A-Z]+)+)$|^(?:[a-z]+(?:_[a-z]+)+)$|^(?:[a-z]+(?: [a-z]+)+)$|^(?:[A-Z][a-z]+(?: [A-Z][a-z]+)* [A-Z][a-z]+(?: [a-z]+)*)$|^(?:[A-Z][a-z]+(?: [A-Z][a-z]+)* [A-Z][a-z]+(?: [A-Z][a-z]+)*)$|^[A-Z]+$|^(?:[A-Z]+(?: [A-Z]+)+)$/};
-    return RegExp.cases.test(str);}
-
 export const removeAccents = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');}
+
+export const validateCases = (str) => {
+    str = removeAccents(str).replace(/[^A-Za-z0-9_ -]/g, '');
+    RegExp = {
+        inconsistentCapitalization: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/,
+        camelAndPascal: /^(?:[a-z][A-Za-z]*|[A-Z][a-z]*(?:[A-Z][a-z]*)*)$/,
+        pascalSnake: /^[A-Z][a-z]+(?:_[A-Z][a-z]+)*$/,
+        general: /^(?:[a-z]+|[A-Z]+|[A-Z][a-z]+)(?:(?:[-_]|[ ])(?:[a-z]+|[A-Z]+|[A-Z][a-z]+))*$/};
+    return RegExp.inconsistentCapitalization.test(str)
+        || RegExp.camelAndPascal.test(str)
+        || RegExp.pascalSnake.test(str)
+        || RegExp.general.test(str);}
 
 export const listWords = (str) => {
     if (/^[A-Z]+(?:_[A-Z]+)*$/.test(str))

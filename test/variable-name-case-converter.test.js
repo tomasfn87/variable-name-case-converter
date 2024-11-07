@@ -1,9 +1,15 @@
 import { runTestArray } from './run-test-array.js';
 
-import { listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase }
-    from '../variable-name-case-converter.js';
+import { listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase,
+    validateCases } from '../variable-name-case-converter.js';
 
-const inputs = {
+const invalidInputs = [
+    "stop_BEING_a_DRUGaddict",
+    "stop BeingADrug_addict",
+    "_stop_being_a_drug_addict_",
+    "StoP BeinG A DruG AddicT"]
+
+const validInputs = {
     camel: "stopBeingADrugAddict",
     kebab: "stop-being-a-drug-addict",
     natural: "Stop being a drug addict!",
@@ -24,171 +30,87 @@ const expected = {
     snake: "stop_being_a_drug_addict"};
 
 [{
+    title:   'Validate Cases (validateCases)',
+    fn:      validateCases,
+    testArr: [
+        { value: '-', result: false },
+        { value: '_', result: false },
+        { value: ' ', result: false },
+        { value: invalidInputs[0], result: false },
+        { value: invalidInputs[1], result: false },
+        { value: invalidInputs[2], result: false },
+        { value: invalidInputs[3], result: false },
+        { value: 'a', result: true },
+        { value: 'A', result: true },
+        { value: validInputs.camel, result: true },
+        { value: validInputs.kebab, result: true },
+        { value: validInputs.natural, result: true },
+        { value: validInputs.pascal, result: true },
+        { value: validInputs.pascalSnake, result: true },
+        { value: validInputs.screamingSnake, result: true },
+        { value: validInputs.snake, result: true },
+        { value: validInputs.spacedLower, result: true },
+        { value: validInputs.spacedUpper, result: true }
+    ]
+},
+{
     title:   'List Words (listWords)',
     fn:      listWords,
     testArr: [
-        {
-            value: inputs.camel,
-            result: expected.list
-        },
-        {
-            value: inputs.pascal,
-            result: expected.list
-        },
-        {
-            value: inputs.kebab,
-            result: expected.list
-        },
-        {
-            value: inputs.pascalSnake,
-            result: expected.list
-        },
-        {
-            value: inputs.screamingSnake,
-            result: expected.list
-        },
-        {
-            value: inputs.snake,
-            result: expected.list
-        },
-        {
-            value: inputs.spacedLower,
-            result: expected.list
-        },
-        {
-            value: inputs.spacedUpper,
-            result: expected.list
-        },
-        {
-            value: inputs.natural,
-            result: expected.list
-        }
+        { value: validInputs.camel, result: expected.list },
+        { value: validInputs.pascal, result: expected.list },
+        { value: validInputs.kebab, result: expected.list },
+        { value: validInputs.pascalSnake, result: expected.list },
+        { value: validInputs.screamingSnake, result: expected.list },
+        { value: validInputs.snake, result: expected.list },
+        { value: validInputs.spacedLower, result: expected.list },
+        { value: validInputs.spacedUpper, result: expected.list },
+        { value: validInputs.natural, result: expected.list }
     ]
 },
 {
     title:   'To Camel Case (toCamelCase)',
     fn:      toCamelCase,
     testArr: [
-        {
-            value: inputs.camel,
-            result: expected.camel
-        },
-        {
-            value: inputs.pascal,
-            result: expected.camel
-        },
-        {
-            value: inputs.kebab,
-            result: expected.camel
-        },
-        {
-            value: inputs.pascalSnake,
-            result: expected.camel
-        },
-        {
-            value: inputs.screamingSnake,
-            result: expected.camel
-        },
-        {
-            value: inputs.snake,
-            result: expected.camel
-        },
-        {
-            value: inputs.spacedLower,
-            result: expected.camel
-        },
-        {
-            value: inputs.spacedUpper,
-            result: expected.camel
-        },
-        {
-            value: inputs.natural,
-            result: expected.camel
-        }
+        { value: validInputs.camel, result: expected.camel },
+        { value: validInputs.pascal, result: expected.camel },
+        { value: validInputs.kebab, result: expected.camel },
+        { value: validInputs.pascalSnake, result: expected.camel },
+        { value: validInputs.screamingSnake, result: expected.camel },
+        { value: validInputs.snake, result: expected.camel },
+        { value: validInputs.spacedLower, result: expected.camel },
+        { value: validInputs.spacedUpper, result: expected.camel },
+        { value: validInputs.natural, result: expected.camel }
     ]
 },
 {
     title:   'To Kebab Case (toKebabCase)',
     fn:      toKebabCase,
     testArr: [
-        {
-            value: inputs.camel,
-            result: expected.kebab
-        },
-        {
-            value: inputs.pascal,
-            result: expected.kebab
-        },
-        {
-            value: inputs.kebab,
-            result: expected.kebab
-        },
-        {
-            value: inputs.pascalSnake,
-            result: expected.kebab
-        },
-        {
-            value: inputs.screamingSnake,
-            result: expected.kebab
-        },
-        {
-            value: inputs.snake,
-            result: expected.kebab
-        },
-        {
-            value: inputs.spacedLower,
-            result: expected.kebab
-        },
-        {
-            value: inputs.spacedUpper,
-            result: expected.kebab
-        },
-        {
-            value: inputs.natural,
-            result: expected.kebab
-        }
+        { value: validInputs.camel, result: expected.kebab },
+        { value: validInputs.pascal, result: expected.kebab },
+        { value: validInputs.kebab, result: expected.kebab },
+        { value: validInputs.pascalSnake, result: expected.kebab },
+        { value: validInputs.screamingSnake, result: expected.kebab },
+        { value: validInputs.snake, result: expected.kebab },
+        { value: validInputs.spacedLower, result: expected.kebab },
+        { value: validInputs.spacedUpper, result: expected.kebab },
+        { value: validInputs.natural, result: expected.kebab }
     ]
 },
 {
     title:   'To Pascal Case (toPascalCase)',
     fn:      toPascalCase,
     testArr: [
-        {
-            value: inputs.camel,
-            result: expected.pascal
-        },
-        {
-            value: inputs.pascal,
-            result: expected.pascal
-        },
-        {
-            value: inputs.kebab,
-            result: expected.pascal
-        },
-        {
-            value: inputs.pascalSnake,
-            result: expected.pascal
-        },
-        {
-            value: inputs.screamingSnake,
-            result: expected.pascal
-        },
-        {
-            value: inputs.snake,
-            result: expected.pascal
-        },
-        {
-            value: inputs.spacedLower,
-            result: expected.pascal
-        },
-        {
-            value: inputs.spacedUpper,
-            result: expected.pascal
-        },
-        {
-            value: inputs.natural,
-            result: expected.pascal
-        }
+        { value: validInputs.camel, result: expected.pascal },
+        { value: validInputs.pascal, result: expected.pascal },
+        { value: validInputs.kebab, result: expected.pascal },
+        { value: validInputs.pascalSnake, result: expected.pascal },
+        { value: validInputs.screamingSnake, result: expected.pascal },
+        { value: validInputs.snake, result: expected.pascal },
+        { value: validInputs.spacedLower, result: expected.pascal },
+        { value: validInputs.spacedUpper, result: expected.pascal },
+        { value: validInputs.natural, result: expected.pascal }
     ]
 },
 {
@@ -196,47 +118,47 @@ const expected = {
     fn:      toPascalCase,
     testArr: [
         {
-            value: inputs.camel,
+            value: validInputs.camel,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.pascal,
+            value: validInputs.pascal,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.kebab,
+            value: validInputs.kebab,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.pascalSnake,
+            value: validInputs.pascalSnake,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.screamingSnake,
+            value: validInputs.screamingSnake,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.snake,
+            value: validInputs.snake,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.spacedLower,
+            value: validInputs.spacedLower,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.spacedUpper,
+            value: validInputs.spacedUpper,
             args:  ["snake"],
             result: expected.pascalSnake
         },
         {
-            value: inputs.natural,
+            value: validInputs.natural,
             args:  ["snake"],
             result: expected.pascalSnake
         }
@@ -246,42 +168,15 @@ const expected = {
     title:   'To Snake Case (toSnakeCase)',
     fn:      toSnakeCase,
     testArr: [
-        {
-            value: inputs.camel,
-            result: expected.snake
-        },
-        {
-            value: inputs.pascal,
-            result: expected.snake
-        },
-        {
-            value: inputs.kebab,
-            result: expected.snake
-        },
-        {
-            value: inputs.pascalSnake,
-            result: expected.snake
-        },
-        {
-            value: inputs.screamingSnake,
-            result: expected.snake
-        },
-        {
-            value: inputs.snake,
-            result: expected.snake
-        },
-        {
-            value: inputs.spacedLower,
-            result: expected.snake
-        },
-        {
-            value: inputs.spacedUpper,
-            result: expected.snake
-        },
-        {
-            value: inputs.natural,
-            result: expected.snake
-        }
+        { value: validInputs.camel, result: expected.snake },
+        { value: validInputs.pascal, result: expected.snake },
+        { value: validInputs.kebab, result: expected.snake },
+        { value: validInputs.pascalSnake, result: expected.snake },
+        { value: validInputs.screamingSnake, result: expected.snake },
+        { value: validInputs.snake, result: expected.snake },
+        { value: validInputs.spacedLower, result: expected.snake },
+        { value: validInputs.spacedUpper, result: expected.snake },
+        { value: validInputs.natural, result: expected.snake }
     ]
 },
 {
@@ -289,47 +184,47 @@ const expected = {
     fn:      toSnakeCase,
     testArr: [
         {
-            value: inputs.camel,
+            value: validInputs.camel,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.pascal,
+            value: validInputs.pascal,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.kebab,
+            value: validInputs.kebab,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.pascalSnake,
+            value: validInputs.pascalSnake,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.screamingSnake,
+            value: validInputs.screamingSnake,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.snake,
+            value: validInputs.snake,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.spacedLower,
+            value: validInputs.spacedLower,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.spacedUpper,
+            value: validInputs.spacedUpper,
             args:  ["screaming"],
             result: expected.screamingSnake
         },
         {
-            value: inputs.natural,
+            value: validInputs.natural,
             args:  ["screaming"],
             result: expected.screamingSnake
         }

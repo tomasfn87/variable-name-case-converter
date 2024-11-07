@@ -1,5 +1,5 @@
-import { debug, listWords, removeAccents, toCamelCase, toKebabCase,
-    toPascalCase, toSnakeCase, validateCases}
+import { debug, listWords, toCamelCase, toKebabCase, toPascalCase,
+    toSnakeCase, validateCases }
     from './variable-name-case-converter.js';
 
 (() => {
@@ -14,7 +14,6 @@ import { debug, listWords, removeAccents, toCamelCase, toKebabCase,
         "snake"];
         
     let input = process.argv[3];
-    input = removeAccents(input).replace(/[^A-Za-z0-9_ -]/g, '');
     if (!validateCases(input)) {
         console.log("Error: input must be in one of the following formats:");
         console.log(`- ${cases.join("\n- ")}`);
