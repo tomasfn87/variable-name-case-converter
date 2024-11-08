@@ -39,14 +39,16 @@ import { debug, listWords, RegExp, toCamelCase, toKebabCase, toPascalCase,
         debug("Snake case", toSnakeCase(input), true);
         return;}
             
+    const skip = cases.indexOf("camel");
+
     if (!validateCases(process.argv[2])) {
         console.log("Error: case must be in one of the following formats:");
-        console.log(`- ${cases.slice(3).join("\n- ")}`);
+        console.log(`- ${cases.slice(skip).join("\n- ")}`);
         return;}
 
     if (!cases.includes(selectedCase)) {
-        console.log(
-            `Select one of the available options: \n- ${cases.slice(3).join("\n- ")}`)
+        console.log("Select one of the available options: ");
+        console.log(`- ${cases.slice(skip).join("\n- ")}`);
         return;}
 
     if (!input) {
