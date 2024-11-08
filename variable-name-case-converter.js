@@ -1,4 +1,4 @@
-export const RegExp = {
+export const RegEx = {
     allUpperCase: /^[A-Z]+(?: [A-Z]+)*$/,
     camelAndPascal: /^(?:[a-z][A-Za-z]*|[A-Z][a-z]*(?:[A-Z][a-z]*)*)$/,
     camelAndPascalUpperUpperContact: /([A-Z])([A-Z])/g,
@@ -16,26 +16,26 @@ export const removeAccents = (str) => {
     return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');}
 
 export const validateCases = (str) => {
-    str = removeAccents(str).replace(RegExp.notAllowedChars, '');
-    return RegExp.inconsistentCapitalization.test(str)
-        || RegExp.camelAndPascal.test(str)
-        || RegExp.pascalSnake.test(str)
-        || RegExp.general.test(str);}
+    str = removeAccents(str).replace(RegEx.notAllowedChars, '');
+    return RegEx.inconsistentCapitalization.test(str)
+        || RegEx.camelAndPascal.test(str)
+        || RegEx.pascalSnake.test(str)
+        || RegEx.general.test(str);}
 
 export const listWords = (str) => {
-    if (RegExp.inconsistentCapitalization.test(str))
+    if (RegEx.inconsistentCapitalization.test(str))
         str = str.toLowerCase();
-    if (RegExp.screamingSnake.test(str))
+    if (RegEx.screamingSnake.test(str))
         return str.toLowerCase().split('_');
-    if (RegExp.allUpperCase.test(str))
+    if (RegEx.allUpperCase.test(str))
         return str.toLowerCase().split(' ');
     return removeAccents(str)
-        .replace(RegExp.camelAndPascalUpperUpperContact, '$1 $2')
-        .replace(RegExp.camelAndPascalLowerUpperContact, '$1 $2')
+        .replace(RegEx.camelAndPascalUpperUpperContact, '$1 $2')
+        .replace(RegEx.camelAndPascalLowerUpperContact, '$1 $2')
         .toLowerCase()
-        .replace(RegExp.notLowerCaseOrNumber, ' ')
-        .replace(RegExp.twoOrMoreEmptySpaces, ' ')
-        .replace(RegExp.trailingEmptySpaces, '')
+        .replace(RegEx.notLowerCaseOrNumber, ' ')
+        .replace(RegEx.twoOrMoreEmptySpaces, ' ')
+        .replace(RegEx.trailingEmptySpaces, '')
         .split(' ')
         .filter(e => e != '');}
 
