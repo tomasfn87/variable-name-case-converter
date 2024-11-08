@@ -4,6 +4,7 @@ import { debug, listWords, RegExp, toCamelCase, toKebabCase, toPascalCase,
 
 (() => {
     const cases = [
+        "natural language",
         "lower case separated by spaces",
         "upper case separated by spaces",
         "camel",
@@ -12,15 +13,23 @@ import { debug, listWords, RegExp, toCamelCase, toKebabCase, toPascalCase,
         "pascal-snake",
         "screaming-snake",
         "snake"];
-        
+
+    const selectedCase = toKebabCase(process.argv[2]);
+    if (selectedCase === 'help') {
+        console.log("1st argument is one of the following:");
+        console.log(`- ${cases.join("\n- ")}`);
+        console.log("\n2nd argument is the string that will be converted.");
+        console.log("\nExample: node main.js snake 'I love pizza'")
+        console.log("- expected output: i_love_pizza")
+        return;}
+
     let input = process.argv[3];
     if (!validateCases(input)) {
         console.log("Error: input must be in one of the following formats:");
         console.log(`- ${cases.join("\n- ")}`);
         return;}
-
-    const debugging = (process.argv[4] || "").toLowerCase();
-    if (debugging === 'debug=true') {
+    
+    if (selectedCase === 'debug') {
         debug("List words", listWords(input));
         debug("Camel case", toCamelCase(input));
         debug("Kebab case", toKebabCase(input));
@@ -32,22 +41,12 @@ import { debug, listWords, RegExp, toCamelCase, toKebabCase, toPascalCase,
             
     if (!validateCases(process.argv[2])) {
         console.log("Error: case must be in one of the following formats:");
-        console.log(`- ${cases.slice(2).join("\n- ")}`);
-        return;}
-
-    const selectedCase = toKebabCase(process.argv[2]);
-
-    if (selectedCase === 'help') {
-        console.log("1st argument is one of the following:");
-        console.log(`- ${cases.join("\n- ")}`);
-        console.log("\n2nd argument is the string that will be converted.");
-        console.log("\nExample: node main.js snake 'I love pizza'")
-        console.log("- expected output: i_love_pizza")
+        console.log(`- ${cases.slice(3).join("\n- ")}`);
         return;}
 
     if (!cases.includes(selectedCase)) {
         console.log(
-            `Select one of the available options: \n- ${cases.slice(2).join("\n- ")}`)
+            `Select one of the available options: \n- ${cases.slice(3).join("\n- ")}`)
         return;}
 
     if (!input) {
