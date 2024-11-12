@@ -4,30 +4,30 @@ import { listWords, toCamelCase, toKebabCase, toPascalCase, toSnakeCase,
     validateCases } from '../variable-name-case-converter.js';
 
 const invalidInputs = [
-    "stop BeingADrug_addict",
-    "stop_BEING_a_DRUGaddict",
-    "StoP BeinG A DruG AddicT",
-    "_stop_being_a_drug_addict_"];
+    "stop BeingACry_baby",
+    "stop_BEING_a_CRYbaby",
+    "StoP BeinG A CrY BabY",
+    "_stop_being_a_cry_baby_"];
 
 const validInputs = {
-    camel: "stopBeingADrugAddict",
-    kebab: "stop-being-a-drug-addict",
-    natural: "Stop being a drug addict!",
-    pascal: "StopBeingADrugAddict",
-    pascalSnake: "Stop_Being_A_Drug_Addict",
-    screamingSnake: "STOP_BEING_A_DRUG_ADDICT",
-    snake: "stop_being_a_drug_addict",
-    spacedLower: "stop being a drug addict",
-    spacedUpper: "STOP BEING A DRUG ADDICT"};
+    camel: "stopBeingACryBaby",
+    kebab: "stop-being-a-cry-baby",
+    natural: "Stop being a cry baby!",
+    pascal: "StopBeingACryBaby",
+    pascalSnake: "Stop_Being_A_Cry_Baby",
+    screamingSnake: "STOP_BEING_A_CRY_BABY",
+    snake: "stop_being_a_cry_baby",
+    spacedLower: "stop being a cry baby",
+    spacedUpper: "STOP BEING A CRY BABY"}
 
 const expected = {
-    list: [ "stop", "being", "a", "drug", "addict" ],
-    camel: "stopBeingADrugAddict",
-    kebab: "stop-being-a-drug-addict",
-    pascal: "StopBeingADrugAddict",
-    pascalSnake: "Stop_Being_A_Drug_Addict",
-    screamingSnake: "STOP_BEING_A_DRUG_ADDICT",
-    snake: "stop_being_a_drug_addict"};
+    list: [ "stop", "being", "a", "cry", "baby" ],
+    camel: "stopBeingACryBaby",
+    kebab: "stop-being-a-cry-baby",
+    pascal: "StopBeingACryBaby",
+    pascalSnake: "Stop_Being_A_Cry_Baby",
+    screamingSnake: "STOP_BEING_A_CRY_BABY",
+    snake: "stop_being_a_cry_baby"};
 
 [{
     title:   'Validate Cases (validateCases)',
