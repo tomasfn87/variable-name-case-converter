@@ -1,6 +1,8 @@
 import { debug, listWords, RegEx, toCamelCase, toKebabCase, toPascalCase,
     toSnakeCase, validateCases }
     from './variable-name-case-converter.js';
+import { color }
+    from './tools/color.js';
 
 (() => {
     const cases = [
@@ -19,8 +21,14 @@ import { debug, listWords, RegEx, toCamelCase, toKebabCase, toPascalCase,
         console.log("1st argument is one of the following:");
         console.log(`- ${cases.join("\n- ")}`);
         console.log("\n2nd argument is the string that will be converted.");
-        console.log("\nExample: node main.js snake 'I love pizza'")
-        console.log("- expected output: i_love_pizza")
+        color.log("default", "\nExample: ");
+        color.log("green", "node");
+        color.log("default", " main.js snake ");
+        color.log("yellow", "'I love pizza'");
+        console.log();
+        color.log("default", "- expected output: ")
+        color.log("green", "i_love_pizza");
+        console.log();
         return;}
 
     let input = process.argv[3];
@@ -59,19 +67,25 @@ import { debug, listWords, RegEx, toCamelCase, toKebabCase, toPascalCase,
 
     switch(selectedCase) {
         case "camel":
-            console.log(toCamelCase(input));
+            color.log("green", toCamelCase(input));
+            console.log();
             return;
         case "kebab":
-            console.log(toKebabCase(input));
+            color.log("green", toKebabCase(input));
+            console.log();
             return;
         case "pascal":
-            console.log(toPascalCase(input));
+            color.log("green", toPascalCase(input));
+            console.log();
             return;
         case "pascal-snake":
-            console.log(toPascalCase(input, "snake"));
+            color.log("green", toPascalCase(input, "snake"));
+            console.log();
             return;
         case "screaming-snake":
-            console.log(toSnakeCase(input, "screaming"));
+            color.log("green", toSnakeCase(input, "screaming"));
+            console.log();
             return;
         case "snake":
-            console.log(toSnakeCase(input));}})();
+            color.log("green", toSnakeCase(input));
+            console.log();}})();

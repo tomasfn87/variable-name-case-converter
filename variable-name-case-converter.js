@@ -1,3 +1,6 @@
+import { color }
+    from './tools/color.js';
+
 export const RegEx = {
     allUpperCase: /^[A-Z]+(?: [A-Z]+)*$/,
     camelAndPascal: /^(?:[a-z][A-Za-z]*|[A-Z][a-z]*(?:[A-Z][a-z]*)*)$/,
@@ -73,5 +76,11 @@ export const toSnakeCase = (str, mode="") => {
 
 export const debug = (name, result, end=false) => {
     console.log(name+":");
-    console.log(" -", result);
+    color.log("default", " - ");
+    if (name === "List words")
+        console.log(result);
+    else {
+        color.log("green", result);
+        console.log();
+    }
     !end && console.log();}
