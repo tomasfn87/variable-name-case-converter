@@ -31,7 +31,10 @@ import { color }
         console.log();
         return;}
 
-    let input = process.argv[3];
+    let input = process.argv[3]
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, "");
+
     if (!validateCases(input)) {
         console.log("Error: input must be in one of the following formats:");
         console.log(`- ${cases.join("\n- ")}`);
