@@ -33,13 +33,15 @@ import { color }
 
     let input = process.argv[3]
         .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, "");
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[_\-]/g, '')
+        .replace(/\s{2,}/g, ' ');
 
     if (!validateCases(input)) {
         console.log("Error: input must be in one of the following formats:");
         console.log(`- ${cases.join("\n- ")}`);
         return;}
-    
+
     if (selectedCase === 'debug') {
         debug("List words", listWords(input));
         debug("Camel case", toCamelCase(input));
@@ -49,7 +51,7 @@ import { color }
         debug("Screaming snake case", toSnakeCase(input, "screaming"));
         debug("Snake case", toSnakeCase(input), true);
         return;}
-            
+
     const skip = cases.indexOf("camel");
 
     if (!validateCases(process.argv[2])) {
